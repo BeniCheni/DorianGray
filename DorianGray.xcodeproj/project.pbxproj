@@ -1,0 +1,433 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FEDA42671AE49A180034FB03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FEDA42661AE49A180034FB03 /* main.m */; };
+		FEDA426A1AE49A180034FB03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FEDA42691AE49A180034FB03 /* AppDelegate.m */; };
+		FEDA426D1AE49A180034FB03 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEDA426C1AE49A180034FB03 /* ViewController.m */; };
+		FEDA42701AE49A180034FB03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEDA426E1AE49A180034FB03 /* Main.storyboard */; };
+		FEDA42721AE49A180034FB03 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEDA42711AE49A180034FB03 /* Images.xcassets */; };
+		FEDA42751AE49A180034FB03 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEDA42731AE49A180034FB03 /* LaunchScreen.xib */; };
+		FEDA42811AE49A180034FB03 /* DorianGrayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FEDA42801AE49A180034FB03 /* DorianGrayTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FEDA427B1AE49A180034FB03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FEDA42591AE49A180034FB03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FEDA42601AE49A180034FB03;
+			remoteInfo = DorianGray;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FEDA42611AE49A180034FB03 /* DorianGray.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DorianGray.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEDA42651AE49A180034FB03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FEDA42661AE49A180034FB03 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FEDA42681AE49A180034FB03 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FEDA42691AE49A180034FB03 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FEDA426B1AE49A180034FB03 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FEDA426C1AE49A180034FB03 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FEDA426F1AE49A180034FB03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FEDA42711AE49A180034FB03 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FEDA42741AE49A180034FB03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		FEDA427A1AE49A180034FB03 /* DorianGrayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DorianGrayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEDA427F1AE49A180034FB03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FEDA42801AE49A180034FB03 /* DorianGrayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DorianGrayTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FEDA425E1AE49A180034FB03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEDA42771AE49A180034FB03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FEDA42581AE49A180034FB03 = {
+			isa = PBXGroup;
+			children = (
+				FEDA42631AE49A180034FB03 /* DorianGray */,
+				FEDA427D1AE49A180034FB03 /* DorianGrayTests */,
+				FEDA42621AE49A180034FB03 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FEDA42621AE49A180034FB03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FEDA42611AE49A180034FB03 /* DorianGray.app */,
+				FEDA427A1AE49A180034FB03 /* DorianGrayTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FEDA42631AE49A180034FB03 /* DorianGray */ = {
+			isa = PBXGroup;
+			children = (
+				FEDA42681AE49A180034FB03 /* AppDelegate.h */,
+				FEDA42691AE49A180034FB03 /* AppDelegate.m */,
+				FEDA426B1AE49A180034FB03 /* ViewController.h */,
+				FEDA426C1AE49A180034FB03 /* ViewController.m */,
+				FEDA426E1AE49A180034FB03 /* Main.storyboard */,
+				FEDA42711AE49A180034FB03 /* Images.xcassets */,
+				FEDA42731AE49A180034FB03 /* LaunchScreen.xib */,
+				FEDA42641AE49A180034FB03 /* Supporting Files */,
+			);
+			path = DorianGray;
+			sourceTree = "<group>";
+		};
+		FEDA42641AE49A180034FB03 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FEDA42651AE49A180034FB03 /* Info.plist */,
+				FEDA42661AE49A180034FB03 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FEDA427D1AE49A180034FB03 /* DorianGrayTests */ = {
+			isa = PBXGroup;
+			children = (
+				FEDA42801AE49A180034FB03 /* DorianGrayTests.m */,
+				FEDA427E1AE49A180034FB03 /* Supporting Files */,
+			);
+			path = DorianGrayTests;
+			sourceTree = "<group>";
+		};
+		FEDA427E1AE49A180034FB03 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FEDA427F1AE49A180034FB03 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FEDA42601AE49A180034FB03 /* DorianGray */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEDA42841AE49A180034FB03 /* Build configuration list for PBXNativeTarget "DorianGray" */;
+			buildPhases = (
+				FEDA425D1AE49A180034FB03 /* Sources */,
+				FEDA425E1AE49A180034FB03 /* Frameworks */,
+				FEDA425F1AE49A180034FB03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DorianGray;
+			productName = DorianGray;
+			productReference = FEDA42611AE49A180034FB03 /* DorianGray.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FEDA42791AE49A180034FB03 /* DorianGrayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEDA42871AE49A180034FB03 /* Build configuration list for PBXNativeTarget "DorianGrayTests" */;
+			buildPhases = (
+				FEDA42761AE49A180034FB03 /* Sources */,
+				FEDA42771AE49A180034FB03 /* Frameworks */,
+				FEDA42781AE49A180034FB03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FEDA427C1AE49A180034FB03 /* PBXTargetDependency */,
+			);
+			name = DorianGrayTests;
+			productName = DorianGrayTests;
+			productReference = FEDA427A1AE49A180034FB03 /* DorianGrayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FEDA42591AE49A180034FB03 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Princess of Darkness Factory";
+				TargetAttributes = {
+					FEDA42601AE49A180034FB03 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					FEDA42791AE49A180034FB03 = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = FEDA42601AE49A180034FB03;
+					};
+				};
+			};
+			buildConfigurationList = FEDA425C1AE49A180034FB03 /* Build configuration list for PBXProject "DorianGray" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FEDA42581AE49A180034FB03;
+			productRefGroup = FEDA42621AE49A180034FB03 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FEDA42601AE49A180034FB03 /* DorianGray */,
+				FEDA42791AE49A180034FB03 /* DorianGrayTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FEDA425F1AE49A180034FB03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEDA42701AE49A180034FB03 /* Main.storyboard in Resources */,
+				FEDA42751AE49A180034FB03 /* LaunchScreen.xib in Resources */,
+				FEDA42721AE49A180034FB03 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEDA42781AE49A180034FB03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FEDA425D1AE49A180034FB03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEDA426D1AE49A180034FB03 /* ViewController.m in Sources */,
+				FEDA426A1AE49A180034FB03 /* AppDelegate.m in Sources */,
+				FEDA42671AE49A180034FB03 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEDA42761AE49A180034FB03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEDA42811AE49A180034FB03 /* DorianGrayTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FEDA427C1AE49A180034FB03 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FEDA42601AE49A180034FB03 /* DorianGray */;
+			targetProxy = FEDA427B1AE49A180034FB03 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FEDA426E1AE49A180034FB03 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FEDA426F1AE49A180034FB03 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FEDA42731AE49A180034FB03 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FEDA42741AE49A180034FB03 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FEDA42821AE49A180034FB03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FEDA42831AE49A180034FB03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FEDA42851AE49A180034FB03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DorianGray/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FEDA42861AE49A180034FB03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DorianGray/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		FEDA42881AE49A180034FB03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DorianGrayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DorianGray.app/DorianGray";
+			};
+			name = Debug;
+		};
+		FEDA42891AE49A180034FB03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DorianGrayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DorianGray.app/DorianGray";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FEDA425C1AE49A180034FB03 /* Build configuration list for PBXProject "DorianGray" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEDA42821AE49A180034FB03 /* Debug */,
+				FEDA42831AE49A180034FB03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FEDA42841AE49A180034FB03 /* Build configuration list for PBXNativeTarget "DorianGray" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEDA42851AE49A180034FB03 /* Debug */,
+				FEDA42861AE49A180034FB03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FEDA42871AE49A180034FB03 /* Build configuration list for PBXNativeTarget "DorianGrayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEDA42881AE49A180034FB03 /* Debug */,
+				FEDA42891AE49A180034FB03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FEDA42591AE49A180034FB03 /* Project object */;
+}
