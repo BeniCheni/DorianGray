@@ -141,10 +141,14 @@ static float captionKerning;
         [oneCommentString addAttribute:NSFontAttributeName value:boldFont range:usernameRange];
         [oneCommentString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
         
+
+        NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
+        NSRange fullRange = [baseString rangeOfString:baseString];
+        
         if (runner % 2 == 0) {
-            NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
             style.alignment = NSTextAlignmentRight;
-            NSRange fullRange = [baseString rangeOfString:baseString];
+            style.headIndent = 20.0;
+            style.tailIndent = -20.0;
             [oneCommentString addAttribute:NSParagraphStyleAttributeName value:style range:fullRange];
         }
         
