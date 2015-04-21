@@ -59,6 +59,7 @@
             }
             
             media.comments = randomComments;
+            
             [randomMediaItems addObject:media];
         }
     }

@@ -17,13 +17,19 @@
 
 @end
 
+static int commentCount;
+
 @implementation ImagesTableViewController
+
+- (void)load {
+    commentCount = 1;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     
     if (self) {
-
+        // Placeholder for initilization
     }
     
     return self;
@@ -32,6 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"firstCell"];
     [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
 }
 
@@ -42,7 +49,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MediaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"mediaCell" forIndexPath:indexPath];
+    commentCount++;
+    MediaTableViewCell *cell;
+    
+    if (commentCount == 1) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"firstCell" forIndexPath:indexPath];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"mediaCell" forIndexPath:indexPath];
+    }
+
     cell.mediaItem = [self items][indexPath.row];
     
     return cell;
@@ -64,7 +79,7 @@
         [[self items] removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-//        [tableView reloadData];  // Subtle bug with delete without scrolling => NaN exception
+//        [tableView reloadData];  // Subtle bug with deleting an item without waiting for a few seconds => NaN exception
     }
 }
 

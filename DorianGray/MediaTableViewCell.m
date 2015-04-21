@@ -1,4 +1,4 @@
-//
+ //
 //  MediaTableViewCell.m
 //  DorianGray
 //
@@ -25,6 +25,7 @@ static UIColor *usernameLabelGray;
 static UIColor *commentLabelGray;
 static UIColor *linkColor;
 static NSParagraphStyle *paragraphStyle;
+static float captionKerning;
 
 @implementation MediaTableViewCell
 
@@ -40,6 +41,28 @@ static NSParagraphStyle *paragraphStyle;
     mutableParagraphStyle.tailIndent = -20.0;
     mutableParagraphStyle.paragraphSpacingBefore = 5;
     paragraphStyle = mutableParagraphStyle;
+    captionKerning = 3.5;
+}
+
+- (id)initFirstCellWithStyle {
+    self = [super init];
+    
+    if (self) {
+        self.mediaImageView = [UIImageView new];
+        self.usernameAndCaptionLabel = [UILabel new];
+        self.usernameAndCaptionLabel.numberOfLines = 0;
+        self.usernameAndCaptionLabel.backgroundColor = usernameLabelGray;
+        
+        self.commentLabel = [UILabel new];
+        self.commentLabel.numberOfLines = 0;
+        self.commentLabel.backgroundColor = commentLabelGray;
+        
+        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel]) {
+            [self.contentView addSubview:view];
+        }
+    }
+    
+    return self;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -53,8 +76,13 @@ static NSParagraphStyle *paragraphStyle;
 
         self.commentLabel = [UILabel new];
         self.commentLabel.numberOfLines = 0;
-        self.commentLabel.backgroundColor = commentLabelGray;
         
+        if ([reuseIdentifier isEqualToString:@"firstCell"]) {
+            self.commentLabel.backgroundColor = [UIColor orangeColor];
+        } else if ([reuseIdentifier isEqualToString:@"mediaCell"]) {
+            self.commentLabel.backgroundColor = commentLabelGray;
+        }
+
         for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel]) {
             [self.contentView addSubview:view];
         }
@@ -79,12 +107,6 @@ static NSParagraphStyle *paragraphStyle;
     self.separatorInset = UIEdgeInsetsMake(0, 0, 0, CGRectGetWidth(self.bounds));
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 - (NSAttributedString *)usernameAndCaptionString {
     CGFloat usernameFontSize = 15;
     
@@ -98,11 +120,15 @@ static NSParagraphStyle *paragraphStyle;
     [mutableUsernameAndCaptionString addAttribute:NSFontAttributeName value:[boldFont fontWithSize:usernameFontSize] range:usernameRange];
     [mutableUsernameAndCaptionString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
     
+    NSRange captionRange = [baseString rangeOfString:self.mediaItem.caption];
+    [mutableUsernameAndCaptionString addAttribute:NSKernAttributeName value:[NSNumber numberWithFloat:captionKerning] range:captionRange];
+    
     return mutableUsernameAndCaptionString;
 }
 
 - (NSAttributedString *)commentString {
     NSMutableAttributedString *commentString = [NSMutableAttributedString new];
+    int runner = 1;
     
     for (Comment *comment in self.mediaItem.comments) {
         // Make a string that says "username comment" followed by a line break
@@ -114,7 +140,16 @@ static NSParagraphStyle *paragraphStyle;
         NSRange usernameRange = [baseString rangeOfString:comment.from.userName];
         [oneCommentString addAttribute:NSFontAttributeName value:boldFont range:usernameRange];
         [oneCommentString addAttribute:NSForegroundColorAttributeName value:linkColor range:usernameRange];
+        
+        if (runner % 2 == 0) {
+            NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
+            style.alignment = NSTextAlignmentRight;
+            NSRange fullRange = [baseString rangeOfString:baseString];
+            [oneCommentString addAttribute:NSParagraphStyleAttributeName value:style range:fullRange];
+        }
+        
         [commentString appendAttributedString:oneCommentString];
+        runner++;
     }
     
     return commentString;
