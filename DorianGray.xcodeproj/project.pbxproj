@@ -12,6 +12,7 @@
 		FE5AB3EF1AE4A9130067C36D /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5AB3EE1AE4A9130067C36D /* Media.m */; };
 		FE5AB3F21AE4AAB60067C36D /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5AB3F11AE4AAB60067C36D /* Comment.m */; };
 		FE5AB3F51AE4AB4D0067C36D /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5AB3F41AE4AB4D0067C36D /* DataSource.m */; };
+		FE5AB3F81AE4BABE0067C36D /* MediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5AB3F71AE4BABE0067C36D /* MediaTableViewCell.m */; };
 		FEBC43071AE49B2E008D0DDF /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FEBC42FD1AE49B2E008D0DDF /* 1.jpg */; };
 		FEBC43081AE49B2E008D0DDF /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FEBC42FE1AE49B2E008D0DDF /* 2.jpg */; };
 		FEBC43091AE49B2E008D0DDF /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FEBC42FF1AE49B2E008D0DDF /* 3.jpg */; };
@@ -50,6 +51,8 @@
 		FE5AB3F11AE4AAB60067C36D /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		FE5AB3F31AE4AB4D0067C36D /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSource.h; sourceTree = "<group>"; };
 		FE5AB3F41AE4AB4D0067C36D /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSource.m; sourceTree = "<group>"; };
+		FE5AB3F61AE4BABE0067C36D /* MediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaTableViewCell.h; sourceTree = "<group>"; };
+		FE5AB3F71AE4BABE0067C36D /* MediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaTableViewCell.m; sourceTree = "<group>"; };
 		FEBC42FD1AE49B2E008D0DDF /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		FEBC42FE1AE49B2E008D0DDF /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		FEBC42FF1AE49B2E008D0DDF /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				FEDA42691AE49A180034FB03 /* AppDelegate.m */,
 				FE5AB3E41AE4A2340067C36D /* ImagesTableViewController.h */,
 				FE5AB3E51AE4A2340067C36D /* ImagesTableViewController.m */,
+				FE5AB3F61AE4BABE0067C36D /* MediaTableViewCell.h */,
+				FE5AB3F71AE4BABE0067C36D /* MediaTableViewCell.m */,
 				FE5AB3EA1AE4A8340067C36D /* User.h */,
 				FE5AB3EB1AE4A8340067C36D /* User.m */,
 				FE5AB3ED1AE4A9130067C36D /* Media.h */,
@@ -285,6 +290,7 @@
 			files = (
 				FE5AB3EC1AE4A8340067C36D /* User.m in Sources */,
 				FE5AB3F21AE4AAB60067C36D /* Comment.m in Sources */,
+				FE5AB3F81AE4BABE0067C36D /* MediaTableViewCell.m in Sources */,
 				FE5AB3EF1AE4A9130067C36D /* Media.m in Sources */,
 				FE5AB3E61AE4A2340067C36D /* ImagesTableViewController.m in Sources */,
 				FE5AB3F51AE4AB4D0067C36D /* DataSource.m in Sources */,

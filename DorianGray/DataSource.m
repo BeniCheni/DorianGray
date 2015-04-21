@@ -13,8 +13,6 @@
 
 @interface DataSource()
 
-//@property (nonatomic, strong) NSArray *mediaItems;
-
 @end
 
 @implementation DataSource
