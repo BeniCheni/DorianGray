@@ -17,13 +17,7 @@
 
 @end
 
-static int commentCount;
-
 @implementation ImagesTableViewController
-
-- (void)load {
-    commentCount = 1;
-}
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
@@ -38,7 +32,6 @@ static int commentCount;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"firstCell"];
     [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
 }
 
@@ -49,15 +42,9 @@ static int commentCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    commentCount++;
     MediaTableViewCell *cell;
     
-    if (commentCount == 1) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"firstCell" forIndexPath:indexPath];
-    } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"mediaCell" forIndexPath:indexPath];
-    }
-
+    cell = [tableView dequeueReusableCellWithIdentifier:@"mediaCell" forIndexPath:indexPath];
     cell.mediaItem = [self items][indexPath.row];
     
     return cell;

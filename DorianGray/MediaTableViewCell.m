@@ -76,12 +76,7 @@ static float captionKerning;
 
         self.commentLabel = [UILabel new];
         self.commentLabel.numberOfLines = 0;
-        
-        if ([reuseIdentifier isEqualToString:@"firstCell"]) {
-            self.commentLabel.backgroundColor = [UIColor orangeColor];
-        } else if ([reuseIdentifier isEqualToString:@"mediaCell"]) {
-            self.commentLabel.backgroundColor = commentLabelGray;
-        }
+        self.commentLabel.backgroundColor = commentLabelGray;
 
         for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel]) {
             [self.contentView addSubview:view];
