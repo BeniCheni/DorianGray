@@ -87,6 +87,7 @@
     MediaTableViewCell *cell;
     
     cell = [tableView dequeueReusableCellWithIdentifier:@"mediaCell" forIndexPath:indexPath];
+
     cell.mediaItem = [self items][indexPath.row];
     
     return cell;
@@ -107,11 +108,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Media *item = [DataSource sharedInstance].mediaItems[indexPath.row];
         [[DataSource sharedInstance] deleteMediaItem:item];
-        
-//        [[self items] removeObjectAtIndex:indexPath.row];
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-//        [tableView reloadData];  // Subtle bug with deleting an item without waiting for a few seconds => NaN exception
     }
 }
 
