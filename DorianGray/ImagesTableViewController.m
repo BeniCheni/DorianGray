@@ -32,7 +32,49 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[DataSource sharedInstance] addObserver:self forKeyPath:@"mediaItems" options:0 context:nil];
     [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (object == [DataSource sharedInstance] && [keyPath isEqualToString:@"mediaItems"]) {
+        NSKeyValueChange kindOfChage = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
+        
+        if (kindOfChage == NSKeyValueChangeSetting) {
+            [self.tableView reloadData];
+            
+        } else if (kindOfChage == NSKeyValueChangeInsertion || kindOfChage == NSKeyValueChangeRemoval || kindOfChage == NSKeyValueChangeReplacement) {
+            
+            // Get a list of index (or indices) that changed
+            NSIndexSet *indexSetOfChanges = change[NSKeyValueChangeIndexesKey];
+            
+            // Convert this NSIndexSet to an NSArray of NSIndexPaths (which is what the table view animation methods require)
+            NSMutableArray *indexPathsThatChanged = [NSMutableArray array];
+            [indexSetOfChanges enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+                NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+                [indexPathsThatChanged addObject:newIndexPath];
+            }];
+            
+            // Call 'beginUpdates' to tell the table view we're about to make changes
+            [self.tableView beginUpdates];
+            
+            // Tell the table view what the changes are
+            if (kindOfChage == NSKeyValueChangeInsertion) {
+                [self.tableView insertRowsAtIndexPaths:indexPathsThatChanged withRowAnimation:UITableViewRowAnimationAutomatic];
+            } else if (kindOfChage == NSKeyValueChangeRemoval) {
+                [self.tableView deleteRowsAtIndexPaths:indexPathsThatChanged withRowAnimation:UITableViewRowAnimationAutomatic];
+            } else if (kindOfChage == NSKeyValueChangeReplacement) {
+                [self.tableView reloadRowsAtIndexPaths:indexPathsThatChanged withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            
+            // Tell the table view that we're done
+            [self.tableView endUpdates];
+        }
+    }
+}
+
+- (void)dealloc {
+    [[DataSource sharedInstance] removeObserver:self forKeyPath:@"mediaItems"];
 }
 
 #pragma mark - Table view data source
