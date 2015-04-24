@@ -41,6 +41,11 @@
     return self;
 }
 
+- (void)deleteMediaItem:(Media *)item {
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
+    [mutableArrayWithKVO removeObject:item];
+}
+
 #pragma mark - Key/Value Observing
 
 - (NSUInteger)countOfMediaItems {
