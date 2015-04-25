@@ -14,8 +14,11 @@
 // KVO (key-value observation) pattern
 
 @interface DataSource() {
-    NSMutableArray *_mediaItem;
+    NSMutableArray *_mediaItems;
 }
+
+@property (nonatomic, strong) NSArray *mediaItems;
+@property (nonatomic, assign) BOOL isRefreshing;
 
 @end
 
