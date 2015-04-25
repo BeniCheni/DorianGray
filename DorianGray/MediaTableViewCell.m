@@ -213,10 +213,6 @@ static float captionKerning;
     } else {
         self.imageHeightConstraint.constant = 0;
     }
-    
-//    self.imageHeightConstraint.constant = 100;
-//    self.imageWidthConstraint.constant = 100;
-    
 }
 
 + (CGFloat)heightForMediaItem:(Media *)mediaItem width:(CGFloat)width {
