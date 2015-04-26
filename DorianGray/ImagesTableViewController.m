@@ -33,8 +33,14 @@
     [super viewDidLoad];
     
     [[DataSource sharedInstance] addObserver:self forKeyPath:@"mediaItems" options:0 context:nil];
+    
+    self.refreshControl = [UIRefreshControl new];
+    [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
+    
     [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
 }
+
+# pragma mark - KVO pattern
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == [DataSource sharedInstance] && [keyPath isEqualToString:@"mediaItems"]) {
@@ -106,13 +112,22 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        Media *item = [DataSource sharedInstance].mediaItems[indexPath.row];
+        Media *item = [self items][indexPath.row];
+        
         [[DataSource sharedInstance] deleteMediaItem:item];
     }
 }
 
+#pragma mark - Utility methods
+
 - (NSArray *)items {
     return [DataSource sharedInstance].mediaItems;
+}
+
+- (void)refreshControlDidFire:(UIRefreshControl *)sender {
+    [[DataSource sharedInstance] requestNewItemWithCompletionHandler:^(NSError *error) {
+        [sender endRefreshing];
+    }];
 }
 
 @end
