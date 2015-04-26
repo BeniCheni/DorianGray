@@ -177,6 +177,7 @@
 - (void)requestOldItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler {
     if (self.isLoadingOlderItems == NO) {
         self.isLoadingOlderItems = YES;
+        
         Media *media = [Media new];
         media.user = [self randomUser];
         media.image = [UIImage imageNamed:@"1.jpg"];
