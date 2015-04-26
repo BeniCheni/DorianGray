@@ -125,9 +125,21 @@
 }
 
 - (void)refreshControlDidFire:(UIRefreshControl *)sender {
-    [[DataSource sharedInstance] requestNewItemWithCompletionHandler:^(NSError *error) {
+    [[DataSource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
         [sender endRefreshing];
     }];
+}
+
+- (void)infiniteScrollIfNecessary {
+    NSIndexPath *bottomIndexPath = [[self.tableView indexPathsForVisibleRows] lastObject];
+    
+    if (bottomIndexPath && bottomIndexPath.row == [self items].count - 1) {
+        [[DataSource sharedInstance] requestOldItemsWithCompletionHandler:nil];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self infiniteScrollIfNecessary];
 }
 
 @end
