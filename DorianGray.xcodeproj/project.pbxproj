@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE5132CD1AEDAE41008779BE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5132CC1AEDAE41008779BE /* LoginViewController.m */; };
 		FE5AB3E61AE4A2340067C36D /* ImagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5AB3E51AE4A2340067C36D /* ImagesTableViewController.m */; };
 		FE5AB3EC1AE4A8340067C36D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5AB3EB1AE4A8340067C36D /* User.m */; };
 		FE5AB3EF1AE4A9130067C36D /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5AB3EE1AE4A9130067C36D /* Media.m */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE5132CB1AEDAE41008779BE /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		FE5132CC1AEDAE41008779BE /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FE5AB3E41AE4A2340067C36D /* ImagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesTableViewController.h; sourceTree = "<group>"; };
 		FE5AB3E51AE4A2340067C36D /* ImagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesTableViewController.m; sourceTree = "<group>"; };
 		FE5AB3EA1AE4A8340067C36D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -133,8 +136,12 @@
 			children = (
 				FEDA42681AE49A180034FB03 /* AppDelegate.h */,
 				FEDA42691AE49A180034FB03 /* AppDelegate.m */,
+				FE5132CB1AEDAE41008779BE /* LoginViewController.h */,
+				FE5132CC1AEDAE41008779BE /* LoginViewController.m */,
 				FE5AB3E41AE4A2340067C36D /* ImagesTableViewController.h */,
 				FE5AB3E51AE4A2340067C36D /* ImagesTableViewController.m */,
+				FE5AB3F31AE4AB4D0067C36D /* DataSource.h */,
+				FE5AB3F41AE4AB4D0067C36D /* DataSource.m */,
 				FE5AB3F61AE4BABE0067C36D /* MediaTableViewCell.h */,
 				FE5AB3F71AE4BABE0067C36D /* MediaTableViewCell.m */,
 				FE5AB3EA1AE4A8340067C36D /* User.h */,
@@ -143,8 +150,6 @@
 				FE5AB3EE1AE4A9130067C36D /* Media.m */,
 				FE5AB3F01AE4AAB60067C36D /* Comment.h */,
 				FE5AB3F11AE4AAB60067C36D /* Comment.m */,
-				FE5AB3F31AE4AB4D0067C36D /* DataSource.h */,
-				FE5AB3F41AE4AB4D0067C36D /* DataSource.m */,
 				FEBC42FC1AE49B03008D0DDF /* Images */,
 				FEDA42711AE49A180034FB03 /* Images.xcassets */,
 				FEDA42731AE49A180034FB03 /* LaunchScreen.xib */,
@@ -293,6 +298,7 @@
 				FE5AB3F81AE4BABE0067C36D /* MediaTableViewCell.m in Sources */,
 				FE5AB3EF1AE4A9130067C36D /* Media.m in Sources */,
 				FE5AB3E61AE4A2340067C36D /* ImagesTableViewController.m in Sources */,
+				FE5132CD1AEDAE41008779BE /* LoginViewController.m in Sources */,
 				FE5AB3F51AE4AB4D0067C36D /* DataSource.m in Sources */,
 				FEDA426A1AE49A180034FB03 /* AppDelegate.m in Sources */,
 				FEDA42671AE49A180034FB03 /* main.m in Sources */,
