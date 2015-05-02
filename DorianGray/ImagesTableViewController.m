@@ -23,7 +23,7 @@
     self = [super initWithStyle:style];
     
     if (self) {
-        // Placeholder for initilization
+        // Placeholder for custom initilization
     }
     
     return self;

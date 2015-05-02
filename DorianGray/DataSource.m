@@ -27,6 +27,8 @@
 
 @implementation DataSource
 
+#pragma mark - Singleton connection to Instagram API
+
 + (instancetype)sharedInstance {
     static dispatch_once_t once;
     static id sharedInstance;
@@ -37,6 +39,8 @@
     return sharedInstance;
 }
 
+#pragma mark - Initialization
+
 - (instancetype)init {
     self = [super init];
     
@@ -46,7 +50,6 @@
         if (!self.accessToken) {
             [self registerForAccessTokenNotification];
         } else {
-            [self populateDataWithParameters:nil completionHandler:nil];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
                 NSArray *storedMediaItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
@@ -59,9 +62,14 @@
                         self.mediaItems = mutableMediaItems;
                         [self didChangeValueForKey:@"mediaItems"];
                         
+                        // Redownload images here to account for the scenario of the image-downdoad job in the different queue did not finish as this point.
                         for (Media *mediaItem in self.mediaItems) {
                             [self downloadImageForMediaItem:mediaItem];
                         }
+                        
+                        // Fetch newer content from the Instagram API to avoid forcing users to pull-to-refresh each time they launch the app.
+                        [self requestNewItemsWithCompletionHandler:nil];
+                        
                     } else {
                         [self populateDataWithParameters:nil completionHandler:nil];
                     }
@@ -77,12 +85,9 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:LoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         self.accessToken = note.object;
         [UICKeyChainStore setString:self.accessToken forKey:@"access token"];
+        
+        [self populateDataWithParameters:nil completionHandler:nil];
     }];
-}
-
-- (void)deleteMediaItem:(Media *)item {
-    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
-    [mutableArrayWithKVO removeObject:item];
 }
 
 #pragma mark - Key/Value Observing
@@ -112,6 +117,11 @@
 }
 
 #pragma mark - Utility Methods
+
+- (void)deleteMediaItem:(Media *)item {
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
+    [mutableArrayWithKVO removeObject:item];
+}
 
 - (void)requestNewItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler {
     self.thereAreNoMoreOlderMessages = NO;
