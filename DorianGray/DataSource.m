@@ -12,6 +12,7 @@
 #import "Comment.h"
 #import "LoginViewController.h"
 #import <UICKeyChainStore.h>
+#import <AFNetworking.h>
 
 @interface DataSource() {
     NSMutableArray *_mediaItems;
@@ -22,6 +23,7 @@
 @property (nonatomic, assign) BOOL isRefreshing;
 @property (nonatomic, assign) BOOL isLoadingOlderItems;
 @property (nonatomic, assign) BOOL thereAreNoMoreOlderMessages;
+@property (nonatomic, strong) AFHTTPRequestOperationManager *instagramOperationManager;
 
 @end
 
@@ -116,6 +118,13 @@
     [_mediaItems replaceObjectAtIndex:index withObject:object];
 }
 
+#pragma mar - AFNetworking
+
+- (void)createOperationManager {
+    NSURL *baseURL = [NSURL URLWithString:@"https://api.instagram.com/v1/"];
+    self.instagramOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+}
+
 #pragma mark - Utility Methods
 
 - (void)deleteMediaItem:(Media *)item {
@@ -178,7 +187,7 @@
             NSMutableString *urlString = [NSMutableString stringWithFormat:@"https://api.instagram.com/v1/users/self/feed?access_token=%@", self.accessToken];
             
             for (NSString *parameterName in parameters) {
-                // e.g. if dictionary contains {count: 50}, append '&count=50' to URL
+                // append request parameter to URL
                 [urlString appendFormat:@"&%@=%@", parameterName, parameters[parameterName]];
             }
             
