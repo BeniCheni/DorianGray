@@ -12,6 +12,9 @@
 @interface MediaFullScreenViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) Media *media;
+
+@property (nonatomic, strong) UIButton *shareButton;
+
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
 
@@ -34,9 +37,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.shareButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.shareButton setTitle:NSLocalizedString(@"Share", @"Share command") forState:UIControlStateNormal];
+    [self.shareButton setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [self.shareButton addTarget:self action:@selector(shareCommandFired) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.shareButton];
+    
     self.scrollView = [UIScrollView new];
     self.scrollView.delegate = self;
-    self.scrollView.backgroundColor = [UIColor whiteColor];
+    self.scrollView.backgroundColor = [UIColor blackColor];
     
     [self.view addSubview:self.scrollView];
     
@@ -60,7 +69,13 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    self.scrollView.frame = self.view.bounds;
+    static const CGFloat itemHeight = 60;
+    CGFloat width = CGRectGetWidth(self.view.bounds);
+    CGFloat scrollViewHeight = CGRectGetHeight(self.view.bounds) - itemHeight;
+    CGFloat shareButtonWidth = width / 3.2;
+    
+    self.shareButton.frame = CGRectMake(CGRectGetMaxX(self.view.bounds) - shareButtonWidth, 0, shareButtonWidth, itemHeight);
+    self.scrollView.frame = CGRectMake(0, CGRectGetMaxY(self.shareButton.frame), width, scrollViewHeight);
     
     CGSize scrollViewFrameSize = self.scrollView.frame.size;
     CGSize scrollViewContentSize = self.scrollView.contentSize;
@@ -129,6 +144,13 @@
         [self.scrollView zoomToRect:CGRectMake(x, y, width, height) animated:YES];
     } else { // Otherwise, zoom out to minimum.
         [self.scrollView setZoomScale:self.scrollView.minimumZoomScale animated:YES];
+    }
+}
+
+- (void)shareCommandFired {
+    if (self.imageView) {
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[self.imageView.image] applicationActivities:nil];
+        [self presentViewController:activityVC animated:YES completion:nil];
     }
 }
 

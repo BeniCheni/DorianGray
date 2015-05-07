@@ -87,7 +87,7 @@
     [[DataSource sharedInstance] removeObserver:self forKeyPath:@"mediaItems"];
 }
 
-#pragma mark - Table view data source
+#pragma mark - Table view methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self items].count;
@@ -165,7 +165,6 @@
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting
                                                                       sourceController:(UIViewController *)source {
-    
     MediaFullScreenAnimator *animator = [MediaFullScreenAnimator new];
     animator.presenting = YES;
     animator.cellImageView = self.lastTappedImageView;
