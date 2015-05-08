@@ -39,13 +39,13 @@
     
     self.shareButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self.shareButton setTitle:NSLocalizedString(@"Share", @"Share command") forState:UIControlStateNormal];
-    [self.shareButton setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [self.shareButton setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
     [self.shareButton addTarget:self action:@selector(shareCommandFired) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.shareButton];
     
     self.scrollView = [UIScrollView new];
     self.scrollView.delegate = self;
-    self.scrollView.backgroundColor = [UIColor blackColor];
+    self.scrollView.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:self.scrollView];
     
@@ -72,7 +72,7 @@
     static const CGFloat itemHeight = 32;
     CGFloat width = CGRectGetWidth(self.view.bounds);
     CGFloat scrollViewHeight = CGRectGetHeight(self.view.bounds) - itemHeight;
-    CGFloat shareButtonWidth = width / 3.2;
+    CGFloat shareButtonWidth = width / M_PI;
     
     self.shareButton.frame = CGRectMake(CGRectGetMaxX(self.view.bounds) - shareButtonWidth, 0, shareButtonWidth, itemHeight);
     self.scrollView.frame = CGRectMake(0, CGRectGetMaxY(self.shareButton.frame), width, scrollViewHeight);

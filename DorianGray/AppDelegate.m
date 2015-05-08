@@ -10,6 +10,7 @@
 #import "ImagesTableViewController.h"
 #import "LoginViewController.h"
 #import "DataSource.h"
+#import <UICKeyChainStore/UICKeyChainStore.h>
 
 @interface AppDelegate ()
 
@@ -66,6 +67,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    // Remove saved access token when exiting app.
+    [UICKeyChainStore removeItemForKey:(@"access token")];
 }
 
 @end
