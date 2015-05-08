@@ -69,7 +69,7 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    static const CGFloat itemHeight = 60;
+    static const CGFloat itemHeight = 32;
     CGFloat width = CGRectGetWidth(self.view.bounds);
     CGFloat scrollViewHeight = CGRectGetHeight(self.view.bounds) - itemHeight;
     CGFloat shareButtonWidth = width / 3.2;
