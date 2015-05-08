@@ -1,2 +1,2 @@
-pod 'UICKeyChainStore'
 pod 'AFNetworking'
+pod 'UICKeyChainStore'
