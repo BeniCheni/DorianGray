@@ -253,38 +253,47 @@
     if (mediaItem.mediaURL && !mediaItem.image) {
         mediaItem.downloadState = MediaDownloadStateDownloadInProgress;
         
-        [self.instagramOperationManager GET:mediaItem.mediaURL.absoluteString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             
-            if ([responseObject isKindOfClass:[UIImage class]]) {
-                mediaItem.image = responseObject;
-                mediaItem.downloadState = MediaDownloadStateHasImage;
-                NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
-                NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
-                [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem];
-                [self saveImages];
-            } else {
-                mediaItem.downloadState = MediaDownloadStateNonRecoverableError;
-            }
+            [self.instagramOperationManager GET:mediaItem.mediaURL.absoluteString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
             
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error downloading image: %@", error);
-            
-            mediaItem.downloadState = MediaDownloadStateNonRecoverableError;
-            
-            if ([error.domain isEqualToString:NSURLErrorDomain]) {
-                if (error.code == NSURLErrorTimedOut
-                        || error.code == NSURLErrorCancelled
-                        || error.code == NSURLErrorCannotConnectToHost
-                        || error.code == NSURLErrorNetworkConnectionLost
-                        || error.code == NSURLErrorNotConnectedToInternet
-                        || error.code == kCFURLErrorInternationalRoamingOff
-                        || error.code == kCFURLErrorCallIsActive
-                        || error.code == kCFURLErrorDataNotAllowed
-                        || error.code == kCFURLErrorRequestBodyStreamExhausted) {
-                    mediaItem.downloadState = MediaDownloadStateNeedsImage;
+                if ([responseObject isKindOfClass:[UIImage class]]) {
+                    mediaItem.image = responseObject;
+                    mediaItem.downloadState = MediaDownloadStateHasImage;
+                    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
+                    NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
+                    [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem];
+                    [self saveImages];
+                } else {
+                    mediaItem.downloadState = MediaDownloadStateNonRecoverableError;
                 }
-            }
-        }];
+                });
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+                dispatch_async(dispatch_get_main_queue(), ^{
+                
+                    NSLog(@"Error downloading image: %@", error);
+            
+                    mediaItem.downloadState = MediaDownloadStateNonRecoverableError;
+            
+                    if ([error.domain isEqualToString:NSURLErrorDomain]) {
+                        if (error.code == NSURLErrorTimedOut
+                                || error.code == NSURLErrorCancelled
+                                || error.code == NSURLErrorCannotConnectToHost
+                                || error.code == NSURLErrorNetworkConnectionLost
+                                || error.code == NSURLErrorNotConnectedToInternet
+                                || error.code == kCFURLErrorInternationalRoamingOff
+                                || error.code == kCFURLErrorCallIsActive
+                                || error.code == kCFURLErrorDataNotAllowed
+                                || error.code == kCFURLErrorRequestBodyStreamExhausted) {
+                            mediaItem.downloadState = MediaDownloadStateNeedsImage;
+                        }
+                    }
+                });
+            }];
+        });
     }
 }
 
@@ -298,7 +307,7 @@
 
 - (void)saveImages {
     if (self.mediaItems.count > 0) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             NSUInteger numberOfItemsToSave = MIN(self.mediaItems.count, 50);
             NSArray *mediaItemsToSave = [self.mediaItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
             NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
