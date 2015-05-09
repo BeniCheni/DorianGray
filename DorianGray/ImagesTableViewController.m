@@ -101,6 +101,14 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    Media *mediaItem = [self items][indexPath.row];
+    
+    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+        [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+    }
+}
+
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *items = [self items];
     Media *item = items[indexPath.row];
