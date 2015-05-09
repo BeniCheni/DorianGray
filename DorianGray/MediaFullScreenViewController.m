@@ -39,19 +39,18 @@
     
     self.shareButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [self.shareButton setTitle:NSLocalizedString(@"Share", @"Share command") forState:UIControlStateNormal];
-    [self.shareButton setContentVerticalAlignment:UIControlContentVerticalAlignmentBottom];
+    [self.shareButton setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
     [self.shareButton addTarget:self action:@selector(shareCommandFired) forControlEvents:UIControlEventTouchUpInside];
+    [self.shareButton setBackgroundColor:[UIColor blackColor]];
     [self.view addSubview:self.shareButton];
     
     self.scrollView = [UIScrollView new];
     self.scrollView.delegate = self;
-    self.scrollView.backgroundColor = [UIColor clearColor];
-    
+    [self.scrollView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.scrollView];
     
     self.imageView = [UIImageView new];
     self.imageView.image = self.media.image;
-    
     [self.scrollView addSubview:self.imageView];
     
     self.scrollView.contentSize = self.media.image.size;
@@ -69,20 +68,19 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    static const CGFloat itemHeight = 32;
-    CGFloat width = CGRectGetWidth(self.view.bounds);
+    static const CGFloat itemHeight = 41;
+    CGFloat wholeWidth = CGRectGetWidth(self.view.bounds);
     CGFloat scrollViewHeight = CGRectGetHeight(self.view.bounds) - itemHeight;
-    CGFloat shareButtonWidth = width / M_PI;
     
-    self.shareButton.frame = CGRectMake(CGRectGetMaxX(self.view.bounds) - shareButtonWidth, 0, shareButtonWidth, itemHeight);
-    self.scrollView.frame = CGRectMake(0, CGRectGetMaxY(self.shareButton.frame), width, scrollViewHeight);
+    self.shareButton.frame = CGRectMake(0, 0, wholeWidth, itemHeight);
+    self.scrollView.frame = CGRectMake(0, CGRectGetMaxY(self.shareButton.frame), wholeWidth, scrollViewHeight);
     
     CGSize scrollViewFrameSize = self.scrollView.frame.size;
     CGSize scrollViewContentSize = self.scrollView.contentSize;
     
     CGFloat scaleWidth = scrollViewFrameSize.width / scrollViewContentSize.width;
     CGFloat scaleHeight = scrollViewFrameSize.height / scrollViewContentSize.height;
-    CGFloat minScale = MIN(scaleWidth, scaleHeight);
+    CGFloat minScale = MIN(scaleWidth, scaleHeight) * 0.7;
     
     self.scrollView.minimumZoomScale = minScale;
     self.scrollView.maximumZoomScale = 1;
