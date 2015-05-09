@@ -86,12 +86,7 @@
                         self.mediaItems = mutableMediaItems;
                         [self didChangeValueForKey:@"mediaItems"];
                         
-                        // Redownload images here to account for the scenario of the image-downdoad job in the different queue did not finish as this point.
-                        for (Media *mediaItem in self.mediaItems) {
-                            [self downloadImageForMediaItem:mediaItem];
-                        }
-                        
-                        // Fetch newer content from the Instagram API to avoid forcing users to pull-to-refresh each time they launch the app.
+                        // Fetch newer content duirng app launch to avoid forcing users to pull-to-refresh each time they launch the app.
                         [self requestNewItemsWithCompletionHandler:nil];
                         
                     } else {
@@ -225,7 +220,7 @@
         
         if (mediaItem) {
             [tmpMediaItems addObject:mediaItem];
-            [self downloadImageForMediaItem:mediaItem];
+
         }
     }
 
@@ -256,17 +251,39 @@
 
 - (void)downloadImageForMediaItem:(Media *)mediaItem {
     if (mediaItem.mediaURL && !mediaItem.image) {
+        mediaItem.downloadState = MediaDownloadStateDownloadInProgress;
+        
         [self.instagramOperationManager GET:mediaItem.mediaURL.absoluteString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
             if ([responseObject isKindOfClass:[UIImage class]]) {
                 mediaItem.image = responseObject;
+                mediaItem.downloadState = MediaDownloadStateHasImage;
                 NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
                 NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
                 [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem];
+                [self saveImages];
+            } else {
+                mediaItem.downloadState = MediaDownloadStateNonRecoverableError;
             }
             
-            [self saveImages];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error downloading image: %@", error);
+            
+            mediaItem.downloadState = MediaDownloadStateNonRecoverableError;
+            
+            if ([error.domain isEqualToString:NSURLErrorDomain]) {
+                if (error.code == NSURLErrorTimedOut
+                        || error.code == NSURLErrorCancelled
+                        || error.code == NSURLErrorCannotConnectToHost
+                        || error.code == NSURLErrorNetworkConnectionLost
+                        || error.code == NSURLErrorNotConnectedToInternet
+                        || error.code == kCFURLErrorInternationalRoamingOff
+                        || error.code == kCFURLErrorCallIsActive
+                        || error.code == kCFURLErrorDataNotAllowed
+                        || error.code == kCFURLErrorRequestBodyStreamExhausted) {
+                    mediaItem.downloadState = MediaDownloadStateNeedsImage;
+                }
+            }
         }];
     }
 }
