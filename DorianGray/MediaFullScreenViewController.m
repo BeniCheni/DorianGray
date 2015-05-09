@@ -68,7 +68,7 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    static const CGFloat itemHeight = 41;
+    static const CGFloat itemHeight = 45;
     CGFloat wholeWidth = CGRectGetWidth(self.view.bounds);
     CGFloat scrollViewHeight = CGRectGetHeight(self.view.bounds) - itemHeight;
     
