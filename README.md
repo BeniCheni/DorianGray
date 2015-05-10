@@ -1,5 +1,5 @@
 # DorianGray
-Dorian Gray as a name may be the perfect parody for a little photo viewing app
+Dorian Gray as a name may be the perfect parody for a little photo viewing app.
 
 ###### Version 1.1 Highlights
 - Full screen mode to view images (*Instagram app does not have full screen viewing feature; Understand that Instagram is trying to remain square-size photos*); Single tap guesture to enter/exist between table view and full-screen mode
