@@ -231,10 +231,6 @@
         NSIndexSet *indexSetOfNewObjects = [NSIndexSet indexSetWithIndexesInRange:rangeOfIndexes];
         
         [mutableArrayWithKVO insertObjects:tmpMediaItems atIndexes:indexSetOfNewObjects];
-        
-        for (Media *media in mutableArrayWithKVO) {
-            [self downloadImageForMediaItem:media];
-        }
     } else if (parameters[@"max_id"]) {
         // infinite scroll request
         if (tmpMediaItems.count == 0) {
