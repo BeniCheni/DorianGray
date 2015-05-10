@@ -12,6 +12,11 @@ Dorian Gray as a name may be the perfect parody for a little photo viewing app.
 - Retrieve and render only visible images on the deceleration of scrolling to mimic lazy-loading, or load just-in-time behavior
 - Various code improvements and fixes
 
+Full Screen Mode
+![](https://c2.staticflickr.com/6/5457/17497495142_e0b50b2a47_z.jpg)
+![](https://c4.staticflickr.com/8/7789/17499640415_0094c5db8c_z.jpg)
+![](https://c4.staticflickr.com/8/7747/16879332783_f6ecda4f37_z.jpg)
+
 Instagram Integration Demo
 ![](https://farm8.staticflickr.com/7712/17111018897_4da01a90d4_c.jpg)
 ![](https://farm9.staticflickr.com/8691/16698207873_c496ee602a_c.jpg)
