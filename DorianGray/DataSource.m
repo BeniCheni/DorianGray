@@ -88,7 +88,6 @@
                         
                         // Fetch newer content duirng app launch to avoid forcing users to pull-to-refresh each time they launch the app.
                         [self requestNewItemsWithCompletionHandler:nil];
-                        
                     } else {
                         [self populateDataWithParameters:nil completionHandler:nil];
                     }
@@ -244,6 +243,10 @@
         [self willChangeValueForKey:@"mediaItems"];
         self.mediaItems = tmpMediaItems;
         [self didChangeValueForKey:@"mediaItems"];
+    }
+    
+    for (Media *media in self.mediaItems) {
+        [self downloadImageForMediaItem:media];
     }
     
     [self saveImages];
