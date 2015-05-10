@@ -18,6 +18,7 @@
 @interface ImagesTableViewController () <MediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, weak) UIImageView *lastTappedImageView;
+@property (nonatomic, assign) BOOL isInitialImageLoad;
 
 @end
 
@@ -42,6 +43,8 @@
     [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
     
     [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
+    
+    self.isInitialImageLoad = YES;
 }
 
 # pragma mark - KVO pattern
@@ -102,14 +105,23 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    Media *mediaItem = [self items][indexPath.row];
     
-    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
-        [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+    if (self.isInitialImageLoad) {
+        [self loadVisibleImages];
+        self.isInitialImageLoad = NO;
     }
+    
+    // checkpoint content
+//    
+//    Media *mediaItem = [self items][indexPath.row];
+//    
+//    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+//        [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+//    }
+    
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *items = [self items];
     Media *item = items[indexPath.row];
     
@@ -138,7 +150,19 @@
     }
 }
 
-#pragma mark - MediaTableViewCellDelegate
+#pragma mark - UIScrollViewDelegate methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self infiniteScrollIfNecessary];
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    if (scrollView.decelerating && scrollView.dragging) {
+        [self loadVisibleImages];
+    }
+}
+
+#pragma mark - MediaTableViewCellDelegate methods
 
 - (void)cell:(MediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView {
     self.lastTappedImageView = imageView;
@@ -168,7 +192,7 @@
     }
 }
 
-#pragma mark - UIViewControllerTransistioningDelegate
+#pragma mark - UIViewControllerTransistioningDelegate methods
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting
@@ -205,8 +229,22 @@
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self infiniteScrollIfNecessary];
+- (void)loadVisibleImages {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    
+    for (NSIndexPath *indexPath in [self.tableView indexPathsForVisibleRows]) {
+        Media *mediaItem = [self items][indexPath.row];
+        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+            [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+        }
+            
+//        });
+    }
+        
+    });
 }
 
 @end
