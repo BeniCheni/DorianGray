@@ -110,15 +110,6 @@
         [self loadVisibleImages];
         self.isInitialImageLoad = NO;
     }
-    
-    // checkpoint content
-//    
-//    Media *mediaItem = [self items][indexPath.row];
-//    
-//    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
-//        [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
-//    }
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -231,19 +222,12 @@
 
 - (void)loadVisibleImages {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-    
-    for (NSIndexPath *indexPath in [self.tableView indexPathsForVisibleRows]) {
-        Media *mediaItem = [self items][indexPath.row];
-        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-        
-        if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
-            [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+        for (NSIndexPath *indexPath in [self.tableView indexPathsForVisibleRows]) {
+            Media *mediaItem = [self items][indexPath.row];
+            if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
+                [[DataSource sharedInstance] downloadImageForMediaItem:mediaItem];
+            }
         }
-            
-//        });
-    }
-        
     });
 }
 
