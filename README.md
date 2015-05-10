@@ -9,7 +9,7 @@ Instagram Integration Demo
 ###### Version 1.1 Highlights
 - Full screen mode to view images (*Instagram app does not have full screen viewing feature; Understand that Instagram is trying to remain square-size photos*); Single tap guesture to enter/exist between table view and full-screen mode
 - Simple custom animation implementation for toggling between table view and full-screen mode
-- Double tap guestue on full-screen would zoom out image to a **smaller** scale with the existing table view on background; Pinch guesture to rotate image to see basic animation
+- Double tap guesture on full-screen would zoom out image to a **smaller** scale with the existing table view on background; Pinch guesture to rotate image to see basic animation
 - **Share** button to use iPhone standard menu that offers standard features such as saving images locally, mailing, etc. (*Instagram app won't let you save the images locally yet.*)
 - Long-presse gesture on table view's image cell would bring up the same iPhone standard menu
 - Use AFNetwork framework
