@@ -209,6 +209,7 @@
     [[DataSource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
         [sender endRefreshing];
     }];
+    [self loadVisibleImages];
 }
 
 - (void)infiniteScrollIfNecessary {
