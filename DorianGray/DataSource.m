@@ -74,7 +74,7 @@
         if (!self.accessToken) {
             [self registerForAccessTokenNotification];
         } else {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
                 NSArray *storedMediaItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
                 
@@ -231,6 +231,10 @@
         NSIndexSet *indexSetOfNewObjects = [NSIndexSet indexSetWithIndexesInRange:rangeOfIndexes];
         
         [mutableArrayWithKVO insertObjects:tmpMediaItems atIndexes:indexSetOfNewObjects];
+        
+        for (Media *media in mutableArrayWithKVO) {
+            [self downloadImageForMediaItem:media];
+        }
     } else if (parameters[@"max_id"]) {
         // infinite scroll request
         if (tmpMediaItems.count == 0) {
@@ -243,10 +247,6 @@
         [self willChangeValueForKey:@"mediaItems"];
         self.mediaItems = tmpMediaItems;
         [self didChangeValueForKey:@"mediaItems"];
-    }
-    
-    for (Media *media in self.mediaItems) {
-        [self downloadImageForMediaItem:media];
     }
     
     [self saveImages];
@@ -310,7 +310,7 @@
 
 - (void)saveImages {
     if (self.mediaItems.count > 0) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             NSUInteger numberOfItemsToSave = MIN(self.mediaItems.count, 5);
             NSArray *mediaItemsToSave = [self.mediaItems subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
             NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
