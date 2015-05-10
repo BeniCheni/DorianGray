@@ -13,14 +13,12 @@ Dorian Gray as a name may be the perfect parody for a little photo viewing app.
 - Various code improvements and fixes
 
 Full Screen Mode
-![](https://c2.staticflickr.com/6/5457/17497495142_e0b50b2a47_z.jpg)
-![](https://c4.staticflickr.com/8/7789/17499640415_0094c5db8c_z.jpg)
-![](https://c4.staticflickr.com/8/7747/16879332783_f6ecda4f37_z.jpg)
 
-Instagram Integration Demo
-![](https://farm8.staticflickr.com/7712/17111018897_4da01a90d4_c.jpg)
-![](https://farm9.staticflickr.com/8691/16698207873_c496ee602a_c.jpg)
-![](https://farm9.staticflickr.com/8766/17130680898_07dde11491_c.jpg)
+![](https://c2.staticflickr.com/6/5457/17497495142_e0b50b2a47_z.jpg)
+
+![](https://c4.staticflickr.com/8/7789/17499640415_0094c5db8c_z.jpg)
+
+![](https://c4.staticflickr.com/8/7747/16879332783_f6ecda4f37_z.jpg)
 
 ###### Version 1.0 Highlights
 - Integrated with Instagram API with login & authentication
@@ -32,6 +30,14 @@ Instagram Integration Demo
 - Fluency of subclassing UITableView, UITableviewcell, UIWebView
 
 More features are coming...
+
+Instagram Integration Demo
+
+![](https://farm8.staticflickr.com/7712/17111018897_4da01a90d4_c.jpg)
+
+![](https://farm9.staticflickr.com/8691/16698207873_c496ee602a_c.jpg)
+
+![](https://farm9.staticflickr.com/8766/17130680898_07dde11491_c.jpg)
 
 Demo with randomly generated static data in previous version:
 
