@@ -1,6 +1,11 @@
 # DorianGray
 Dorian Gray as a name may be the perfect parody for a little photo viewing app.
 
+Instagram Integration Demo
+![](https://farm8.staticflickr.com/7712/17111018897_4da01a90d4_c.jpg)
+![](https://farm9.staticflickr.com/8691/16698207873_c496ee602a_c.jpg)
+![](https://farm9.staticflickr.com/8766/17130680898_07dde11491_c.jpg)
+
 ###### Version 1.1 Highlights
 - Full screen mode to view images (*Instagram app does not have full screen viewing feature; Understand that Instagram is trying to remain square-size photos*); Single tap guesture to enter/exist between table view and full-screen mode
 - Simple custom animation implementation for toggling between table view and full-screen mode
@@ -22,11 +27,6 @@ Dorian Gray as a name may be the perfect parody for a little photo viewing app.
 - Fluency of subclassing UITableView, UITableviewcell, UIWebView
 
 More features are coming...
-
-Instagram Integration Demo
-![](https://farm8.staticflickr.com/7712/17111018897_4da01a90d4_c.jpg)
-![](https://farm9.staticflickr.com/8691/16698207873_c496ee602a_c.jpg)
-![](https://farm9.staticflickr.com/8766/17130680898_07dde11491_c.jpg)
 
 Demo with randomly generated static data in previous version:
 
