@@ -18,6 +18,7 @@
 @interface ImagesTableViewController () <MediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, weak) UIImageView *lastTappedImageView;
+@property (nonatomic, assign) BOOL isInitialImageLoad;
 
 @end
 
@@ -42,6 +43,8 @@
     [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
     
     [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
+    
+    self.isInitialImageLoad = YES;
 }
 
 # pragma mark - KVO pattern
@@ -99,6 +102,16 @@
     cell.mediaItem = [self items][indexPath.row];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView.dragging) {
+        self.isInitialImageLoad = NO;
+    }
+    
+    if (self.isInitialImageLoad && !self.tableView.dragging) {
+        [self loadVisibleImages];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
