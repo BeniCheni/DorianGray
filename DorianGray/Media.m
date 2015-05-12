@@ -45,6 +45,10 @@
         }
         
         self.comments = commentsArray;
+        
+        BOOL userHasLiked = [mediaDictionary[@"user_has_liked"] boolValue];
+
+        self.likeState = userHasLiked ? LikeStateLiked : LikeStateNotLiked;
     }
     
     return self;
@@ -63,6 +67,7 @@
         self.downloadState = [aDecoder decodeIntegerForKey:NSStringFromSelector(@selector(downloadState))];
         self.caption = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(caption))];
         self.comments = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(comments))];
+        self.likeState = [aDecoder decodeIntegerForKey:NSStringFromSelector(@selector(likeState))];
     }
     
     return self;
@@ -76,6 +81,7 @@
     [aCoder encodeInteger:self.downloadState forKey:NSStringFromSelector(@selector(downloadState))];
     [aCoder encodeObject:self.caption forKey:NSStringFromSelector(@selector(caption))];
     [aCoder encodeObject:self.comments forKey:NSStringFromSelector(@selector(comments))];
+    [aCoder encodeInteger:self.likeState forKey:NSStringFromSelector(@selector(likeState))];
 }
 
 @end

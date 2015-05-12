@@ -39,6 +39,7 @@
     
     [[DataSource sharedInstance] addObserver:self forKeyPath:@"mediaItems" options:0 context:nil];
     
+    // pull-to-refresh
     self.refreshControl = [UIRefreshControl new];
     [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
     
@@ -185,6 +186,18 @@
     }
 }
 
+- (void)cellDidPressLikeButton:(MediaTableViewCell *)cell {
+    Media *item = cell.mediaItem;
+    
+    [[DataSource sharedInstance] toggleLikeOnMediaItem:item withCompletionHandler:^{
+        if (cell.mediaItem == item) {
+            cell.mediaItem = item;
+        }
+    }];
+    
+    cell.mediaItem = item;
+}
+
 #pragma mark - UIViewControllerTransistioningDelegate methods
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
@@ -210,6 +223,7 @@
 
 - (void)refreshControlDidFire:(UIRefreshControl *)sender {
     [[DataSource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
+        [self loadVisibleImages]; // Load images after pull-to-refresh for new data.
         [sender endRefreshing];
     }];
 }

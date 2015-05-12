@@ -77,10 +77,63 @@
     return _circleLayer;
 }
 
-//- (void)layoutAnitmatedLayer {
-//    [self.layer addSublayer:self.circleLayer];
-//    
-//    self.circleLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
-//}
+- (void)layoutAnitmatedLayer {
+    [self.layer addSublayer:self.circleLayer];
+    
+    self.circleLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    if (newSuperview != nil) {
+        [self layoutAnitmatedLayer];
+    } else {
+        [self.circleLayer removeFromSuperlayer];
+        self.circleLayer = nil;
+    }
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    
+    if (self.superview != nil) {
+        [self layoutAnitmatedLayer];
+    }
+}
+
+- (void)setRadius:(CGFloat)radius {
+    _radius = radius;
+    
+    [_circleLayer removeFromSuperlayer];
+    _circleLayer = nil;
+    
+    [self layoutAnitmatedLayer];
+}
+
+- (void)setStrokeColor:(UIColor *)strokeColor {
+    _strokeColor = strokeColor;
+    _circleLayer.strokeColor = strokeColor.CGColor;
+}
+
+- (void)setStrokeThickness:(CGFloat)strokeThickness {
+    _strokeThickness = strokeThickness;
+    _circleLayer.lineWidth = _strokeThickness;
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    
+    if (self) {
+        self.strokeThickness = 1;
+        self.radius = 12;
+        self.strokeColor = [UIColor purpleColor];
+    }
+    
+    return self;
+}
+
+- (CGSize)sizeThatFits:(CGSize)size {
+    return CGSizeMake((self.radius + self.strokeThickness / 2 + 5) * 2,
+                      (self.radius + self.strokeThickness / 2 + 5) * 2);
+}
 
 @end

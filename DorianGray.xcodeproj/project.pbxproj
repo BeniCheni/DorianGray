@@ -23,6 +23,7 @@
 		FEDA42721AE49A180034FB03 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEDA42711AE49A180034FB03 /* Images.xcassets */; };
 		FEDA42751AE49A180034FB03 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEDA42731AE49A180034FB03 /* LaunchScreen.xib */; };
 		FEDA42811AE49A180034FB03 /* DorianGrayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FEDA42801AE49A180034FB03 /* DorianGrayTests.m */; };
+		FEED52FD1B015F5C0005F6F4 /* LikeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FEED52FC1B015F5C0005F6F4 /* LikeButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		FEDA427A1AE49A180034FB03 /* DorianGrayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DorianGrayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEDA427F1AE49A180034FB03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEDA42801AE49A180034FB03 /* DorianGrayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DorianGrayTests.m; sourceTree = "<group>"; };
+		FEED52FB1B015F5C0005F6F4 /* LikeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeButton.h; sourceTree = "<group>"; };
+		FEED52FC1B015F5C0005F6F4 /* LikeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +143,8 @@
 				FE9897F61B00131C003D4EA2 /* CircleSpinnerView.m */,
 				FE5AB3F61AE4BABE0067C36D /* MediaTableViewCell.h */,
 				FE5AB3F71AE4BABE0067C36D /* MediaTableViewCell.m */,
+				FEED52FB1B015F5C0005F6F4 /* LikeButton.h */,
+				FEED52FC1B015F5C0005F6F4 /* LikeButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -361,6 +366,7 @@
 				FE5132CD1AEDAE41008779BE /* LoginViewController.m in Sources */,
 				FE5AB3F51AE4AB4D0067C36D /* DataSource.m in Sources */,
 				FEDA426A1AE49A180034FB03 /* AppDelegate.m in Sources */,
+				FEED52FD1B015F5C0005F6F4 /* LikeButton.m in Sources */,
 				FE9897F71B00131C003D4EA2 /* CircleSpinnerView.m in Sources */,
 				FEDA42671AE49A180034FB03 /* main.m in Sources */,
 			);
