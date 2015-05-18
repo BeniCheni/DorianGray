@@ -20,7 +20,7 @@ Dorian Gray as a name may be the perfect parody for a little photo viewing app.
 ![](https://c1.staticflickr.com/9/8860/17615234829_2898c0d768_z.jpg)
 
 ###### Version 1.1 Highlights
-- Full screen mode to view images (*Instagram app does not have full screen viewing feature; Understand that Instagram is trying to remain square-size photos*); Single tap guesture to enter/exist between table view and full-screen mode
+- Full screen mode to view images (*Instagram app does not have full screen viewing feature; Understand that Instagram is trying to remain square-size photos*); Single tap gesture to enter/exist between table view and full-screen mode
 - Simple custom animation implementation for toggling between table view and full-screen mode
 - Double tap gesture on full-screen would zoom out image to a **smaller** scale with the existing table view on background; Pinch gesture to rotate image to see basic animation
 - **Share** button to use iPhone standard menu that offers standard features such as saving images locally, mailing, etc. (*Instagram app won't let you save the images locally yet.*)
