@@ -41,6 +41,7 @@
         CALayer *maskLayer = [CALayer layer];
         maskLayer.contents = (id) [[UIImage imageNamed:@"angle-mask"] CGImage];
         maskLayer.frame = _circleLayer.bounds;
+        _circleLayer.mask = maskLayer;
         
         CFTimeInterval animationDuration = 1;
         CAMediaTimingFunction *linearCurve = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
@@ -125,7 +126,7 @@
     if (self) {
         self.strokeThickness = 1;
         self.radius = 12;
-        self.strokeColor = [UIColor purpleColor];
+        self.strokeColor = [UIColor orangeColor];
     }
     
     return self;

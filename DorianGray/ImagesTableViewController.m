@@ -18,7 +18,6 @@
 @interface ImagesTableViewController () <MediaTableViewCellDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, weak) UIImageView *lastTappedImageView;
-@property (nonatomic, assign) BOOL isInitialImageLoad;
 
 @end
 
@@ -44,8 +43,6 @@
     [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
     
     [self.tableView registerClass:[MediaTableViewCell class] forCellReuseIdentifier:@"mediaCell"];
-    
-    self.isInitialImageLoad = YES;
 }
 
 # pragma mark - KVO pattern
@@ -106,13 +103,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.tableView.dragging) {
-        self.isInitialImageLoad = NO;
-    }
-    
-    if (self.isInitialImageLoad && !self.tableView.dragging) {
         [self loadVisibleImages];
-    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -148,12 +139,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self infiniteScrollIfNecessary];
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    if (scrollView.decelerating && scrollView.dragging) {
-        [self loadVisibleImages];
-    }
 }
 
 #pragma mark - MediaTableViewCellDelegate methods
@@ -237,7 +222,7 @@
 }
 
 - (void)loadVisibleImages {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         for (NSIndexPath *indexPath in [self.tableView indexPathsForVisibleRows]) {
             Media *mediaItem = [self items][indexPath.row];
             if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {

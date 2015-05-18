@@ -28,7 +28,7 @@
         [self addSubview:self.spinnerView];
         
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        self.contentEdgeInsets = UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0);
+        self.contentEdgeInsets = UIEdgeInsetsMake(5.0, 10.0, 5.0, 10.0);
         self.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
         self.likeButtonState = LikeStateNotLiked;
     }

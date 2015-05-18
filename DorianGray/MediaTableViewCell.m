@@ -19,10 +19,12 @@
 @property (nonatomic, strong) UILabel *commentLabel;
 @property (nonatomic, strong) NSLayoutConstraint *imageHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *usernameAndCaptionLabelHeightConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *likeCountHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *commentLabelHeightConstraint;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
 @property (nonatomic, strong) LikeButton *likeButton;
+@property (nonatomic, strong) UITextView *likeCountTextView;
 
 @end
 
@@ -57,7 +59,7 @@ static float captionKerning;
     if (self) {
         self.mediaImageView = [UIImageView new];
         self.mediaImageView.userInteractionEnabled = YES;
-
+        
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapFired:)];
         self.tapGestureRecognizer.delegate = self;
         [self.mediaImageView addGestureRecognizer:self.tapGestureRecognizer];
@@ -78,19 +80,24 @@ static float captionKerning;
         [self.likeButton addTarget:self action:@selector(likePressed:) forControlEvents:UIControlEventTouchUpInside];
         self.likeButton.backgroundColor = usernameLabelGray;
         
-        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.likeButton]) {
+        self.likeCountTextView = [UITextView new];
+        self.likeCountTextView.backgroundColor = usernameLabelGray;
+        self.likeCountTextView.textAlignment = NSTextAlignmentRight;
+        [self.likeCountTextView sizeToFit];
+        
+        for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.likeCountTextView, self.likeButton]) {
             [self.contentView addSubview:view];
             view.translatesAutoresizingMaskIntoConstraints = NO;
         }
         
-        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeButton);
+        NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel, _likeCountTextView, _likeButton);
         
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|"
                                                                                  options:kNilOptions
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
         
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeButton(==38)]|"
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel][_likeCountTextView(==50)][_likeButton(==38)]|"
                                                                                  options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom
                                                                                  metrics:nil
                                                                                    views:viewDictionary]];
@@ -150,7 +157,7 @@ static float captionKerning;
     if (_mediaItem.image) {
         self.imageHeightConstraint.constant = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds);
     } else {
-        self.imageHeightConstraint.constant = 0;
+        self.imageHeightConstraint.constant = 325;
     }
     
     self.usernameAndCaptionLabelHeightConstraint.constant = usernameLabelSize.height == 0 ? 0 : usernameLabelSize.height + 20;
@@ -222,10 +229,26 @@ static float captionKerning;
 
 - (void)setMediaItem:(Media *)mediaItem {
     _mediaItem = mediaItem;
-    self.mediaImageView.image = _mediaItem.image;
+    
+    if (_mediaItem.image) {
+        self.mediaImageView.image = _mediaItem.image;
+    } else {
+        self.mediaImageView.image = [UIImage imageNamed:@"no_image"];
+    }
+    
     self.usernameAndCaptionLabel.attributedText = [self usernameAndCaptionString];
     self.commentLabel.attributedText = [self commentString];
-    self.likeButton.likeButtonState = mediaItem.likeState;
+    self.likeButton.likeButtonState = _mediaItem.likeState;
+    
+    NSInteger likeCount = _mediaItem.likeCount;
+    NSMutableString *thousandText = [NSMutableString stringWithString:@""];
+    
+    if (likeCount >= 1000) {
+        likeCount = likeCount / 1000;
+        [thousandText appendString:@"k"];
+    }
+    
+    self.likeCountTextView.text = [NSString stringWithFormat:@"%ld%@", (long)likeCount, thousandText];
 }
 
 + (CGFloat)heightForMediaItem:(Media *)mediaItem width:(CGFloat)width {

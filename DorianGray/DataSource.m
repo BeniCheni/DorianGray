@@ -74,7 +74,7 @@
         if (!self.accessToken) {
             [self registerForAccessTokenNotification];
         } else {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(mediaItems))];
                 NSArray *storedMediaItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
                 
@@ -86,7 +86,7 @@
                         self.mediaItems = mutableMediaItems;
                         [self didChangeValueForKey:@"mediaItems"];
                         
-                        // Fetch newer content duirng app launch to avoid forcing users to pull-to-refresh each time they launch the app.
+                        // Fetch newer items duirng app launch to avoid forcing users to pull-to-refresh each time they launch the app.
                         [self requestNewItemsWithCompletionHandler:nil];
                     } else {
                         [self populateDataWithParameters:nil completionHandler:nil];
@@ -189,6 +189,31 @@
     return @"e2a56985ac574dba9ac6290aacda8387";
 }
 
+- (void)fetchLikeCountForItem:(Media *)item completionHandler:(NewItemCompletionBlock)completionHandler {
+    if (self.accessToken) {
+        // API call example - /media/{media-id}?access_token=ACCESS-TOKEN
+        NSMutableDictionary *mutableParameters = [@{@"access_token": self.accessToken} mutableCopy];
+        NSString *itemURL = [NSString stringWithFormat:@"media/%@", item.idNumber];
+        
+        [self.instagramOperationManager GET:itemURL parameters:mutableParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                [self willChangeValueForKey:@"mediaItems"];
+                item.likeCount = [responseObject[@"data"][@"likes"][@"count"] integerValue];
+                [self didChangeValueForKey:@"mediaItems"];
+
+            }
+            
+            if (completionHandler) {
+                completionHandler(nil);
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (completionHandler) {
+                completionHandler(error);
+            }
+        }];
+    }
+}
+
 - (void)populateDataWithParameters:(NSDictionary *)parameters completionHandler:(NewItemCompletionBlock)completionHandler {
     if (self.accessToken) {
         NSMutableDictionary *mutableParameters = [@{@"access_token": self.accessToken} mutableCopy];
@@ -245,17 +270,16 @@
         [self didChangeValueForKey:@"mediaItems"];
     }
     
-    [self saveImages];
+    [self saveMediaItems];
 }
 
 - (void)downloadImageForMediaItem:(Media *)mediaItem {
     if (mediaItem.mediaURL && !mediaItem.image) {
         mediaItem.downloadState = MediaDownloadStateDownloadInProgress;
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             
             [self.instagramOperationManager GET:mediaItem.mediaURL.absoluteString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
                 dispatch_async(dispatch_get_main_queue(), ^{
             
                 if ([responseObject isKindOfClass:[UIImage class]]) {
@@ -264,13 +288,12 @@
                     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
                     NSUInteger index = [mutableArrayWithKVO indexOfObject:mediaItem];
                     [mutableArrayWithKVO replaceObjectAtIndex:index withObject:mediaItem];
-                    [self saveImages];
+                    [self saveMediaItems];
                 } else {
                     mediaItem.downloadState = MediaDownloadStateNonRecoverableError;
                 }
                 });
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            
                 dispatch_async(dispatch_get_main_queue(), ^{
                 
                     NSLog(@"Error downloading image: %@", error);
@@ -304,7 +327,7 @@
     return dataPath;
 }
 
-- (void)saveImages {
+- (void)saveMediaItems {
     if (self.mediaItems.count > 0) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             NSUInteger numberOfItemsToSave = MIN(self.mediaItems.count, 5);
@@ -358,6 +381,9 @@
             }
         }];
     }
+    
+    [self fetchLikeCountForItem:mediaItem completionHandler:nil];
+    [self saveMediaItems];
 }
 
 @end
