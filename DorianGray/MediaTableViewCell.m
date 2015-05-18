@@ -83,6 +83,7 @@ static float captionKerning;
         self.likeCountTextView = [UITextView new];
         self.likeCountTextView.backgroundColor = usernameLabelGray;
         self.likeCountTextView.textAlignment = NSTextAlignmentRight;
+        [self.likeCountTextView setContentInset:UIEdgeInsetsMake(2, 0, 0, 0)];
         [self.likeCountTextView sizeToFit];
         
         for (UIView *view in @[self.mediaImageView, self.usernameAndCaptionLabel, self.commentLabel, self.likeCountTextView, self.likeButton]) {
