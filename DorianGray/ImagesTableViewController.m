@@ -222,7 +222,7 @@
 }
 
 - (void)loadVisibleImages {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         for (NSIndexPath *indexPath in [self.tableView indexPathsForVisibleRows]) {
             Media *mediaItem = [self items][indexPath.row];
             if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
