@@ -38,6 +38,7 @@
     
     [[DataSource sharedInstance] addObserver:self forKeyPath:@"mediaItems" options:0 context:nil];
     
+    // pull-to-refresh
     self.refreshControl = [UIRefreshControl new];
     [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
     
@@ -101,6 +102,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+        [self loadVisibleImages];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *items = [self items];
     Media *item = items[indexPath.row];
@@ -136,12 +141,6 @@
     [self infiniteScrollIfNecessary];
 }
 
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    if (scrollView.decelerating && scrollView.dragging) {
-        [self loadVisibleImages];
-    }
-}
-
 #pragma mark - MediaTableViewCellDelegate methods
 
 - (void)cell:(MediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView {
@@ -172,6 +171,18 @@
     }
 }
 
+- (void)cellDidPressLikeButton:(MediaTableViewCell *)cell {
+    Media *item = cell.mediaItem;
+    
+    [[DataSource sharedInstance] toggleLikeOnMediaItem:item withCompletionHandler:^{
+        if (cell.mediaItem == item) {
+            cell.mediaItem = item;
+        }
+    }];
+    
+    cell.mediaItem = item;
+}
+
 #pragma mark - UIViewControllerTransistioningDelegate methods
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
@@ -197,6 +208,7 @@
 
 - (void)refreshControlDidFire:(UIRefreshControl *)sender {
     [[DataSource sharedInstance] requestNewItemsWithCompletionHandler:^(NSError *error) {
+        [self loadVisibleImages]; // Load images after pull-to-refresh for new data.
         [sender endRefreshing];
     }];
 }
@@ -210,7 +222,7 @@
 }
 
 - (void)loadVisibleImages {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         for (NSIndexPath *indexPath in [self.tableView indexPathsForVisibleRows]) {
             Media *mediaItem = [self items][indexPath.row];
             if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
