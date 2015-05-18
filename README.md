@@ -1,6 +1,24 @@
 # DorianGray
 Dorian Gray as a name may be the perfect parody for a little photo viewing app.
 
+##### 'Picture-in-Picture' Zoomed Out Effect in Full-Screen Image Mode
+![](https://c2.staticflickr.com/6/5342/17802206041_649b50db0b_z.jpg)
+
+###### Version 1.2 Highlights
+- Like button with spinner animation
+- Like count
+- Save 'Like' button state locally when the button is toggled
+- UX Improvements
+  - "No Image" placeholder image before downloaded image arrives
+  - Updated image height constraints and image loading on scrolling to fine-tune UX
+  - Update GCD queues' priorities to fine-tune scrolling performance
+
+##### No-Image placeholder while images are downloading
+![](https://c4.staticflickr.com/8/7739/17775188716_a36c08c4ab_z.jpg)
+
+##### Like Button & Count
+![](https://c1.staticflickr.com/9/8860/17615234829_2898c0d768_z.jpg)
+
 ###### Version 1.1 Highlights
 - Full screen mode to view images (*Instagram app does not have full screen viewing feature; Understand that Instagram is trying to remain square-size photos*); Single tap guesture to enter/exist between table view and full-screen mode
 - Simple custom animation implementation for toggling between table view and full-screen mode
