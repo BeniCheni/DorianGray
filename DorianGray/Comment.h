@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Princess of Darkness Factory. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 @class User;
 
