@@ -277,7 +277,7 @@
     if (mediaItem.mediaURL && !mediaItem.image) {
         mediaItem.downloadState = MediaDownloadStateDownloadInProgress;
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             [self.instagramOperationManager GET:mediaItem.mediaURL.absoluteString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 dispatch_async(dispatch_get_main_queue(), ^{
